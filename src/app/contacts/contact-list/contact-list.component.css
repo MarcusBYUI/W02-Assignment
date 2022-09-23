@@ -1,0 +1,14 @@
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.panel-body {
+  padding: 10px;
+}
