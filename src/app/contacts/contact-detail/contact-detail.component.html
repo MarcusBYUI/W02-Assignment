@@ -1,9 +1,14 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3></h3>
+    <h3>{{ contact.name }}</h3>
 
     <div class="panel-header">
-      <img [src]="" alt="" class="img-responsive" style="max-height: 100px" />
+      <img
+        [src]="contact.imageUrl"
+        alt="{{ contact.name }}"
+        class="img-responsive"
+        style="max-height: 100px"
+      />
       <div class="button-container">
         <button class="btn btn-primary">Edit</button>
         <button class="btn btn-danger">Delete</button>
@@ -13,11 +18,11 @@
   <div class="row panel-body">
     <div>
       <p>Email:</p>
-      <span></span>
+      <span>{{ contact.email }}</span>
     </div>
     <div>
       <p>Phone:</p>
-      <span></span>
+      <span>{{ contact.phone }}</span>
     </div>
   </div>
 </div>
