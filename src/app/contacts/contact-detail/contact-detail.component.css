@@ -1,0 +1,20 @@
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
+}
+
+.panel-body > div {
+  display: flex;
+  padding: 0 9px;
+  gap: 5px;
+}
+
+.panel-body > div p {
+  font-weight: 600;
+}
