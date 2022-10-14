@@ -21,9 +21,12 @@ export class ContactService {
 
   //returns a contact by id
   getContact(id: string): Contact {
-    this.contacts.forEach((item: Contact) => {
-      if (item.id == id) return item;
-    });
+    for (let i = 0; i < this.contacts.length; i++) {
+      const element = this.contacts[i];
+      if (element.id === id) {
+        return element;
+      }
+    }
     return null;
   }
 }

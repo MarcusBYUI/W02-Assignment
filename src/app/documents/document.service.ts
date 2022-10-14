@@ -18,9 +18,12 @@ export class DocumentService {
     return this.documents.slice();
   }
   getDocument(id: string) {
-    this.documents.forEach((item: Document) => {
-      if (item.id == id) return item;
-    });
+    for (let i = 0; i < this.documents.length; i++) {
+      const element = this.documents[i];
+      if (element.id === id) {
+        return element;
+      }
+    }
     return null;
   }
 }
