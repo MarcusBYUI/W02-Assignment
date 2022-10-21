@@ -15,14 +15,14 @@ export class DocumentDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private DocumentService: DocumentService,
+    private documentService: DocumentService,
     private router: Router,
     private WindRefService: WindRefService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.document = this.DocumentService.getDocument(params['id']);
+      this.document = this.documentService.getDocument(params['id']);
     });
     this.nativeWindow = this.WindRefService.getNativeWindow();
   }
@@ -30,5 +30,10 @@ export class DocumentDetailComponent implements OnInit {
     if (this.document.url) {
       this.nativeWindow.open(this.document.url);
     }
+  }
+
+  onDelete() {
+    this.documentService.deleteDocument(this.document);
+    this.router.navigate(['/documents']);
   }
 }

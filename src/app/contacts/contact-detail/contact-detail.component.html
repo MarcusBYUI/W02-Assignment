@@ -10,8 +10,8 @@
         style="max-height: 100px"
       />
       <div class="button-container">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+        <a routerLink="edit" class="btn btn-primary">Edit</a>
+        <button (click)="deleteContact()" class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>

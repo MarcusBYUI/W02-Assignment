@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <div class="panel-header">
       <h3>Contacts</h3>
-      <button class="btn btn-success">New Contact</button>
+      <a routerLink="new" class="btn btn-success">New Contact</a>
     </div>
   </div>
   <div class="row panel-body">
@@ -10,7 +10,7 @@
       <cms-contact-item
         *ngFor="let contact of contacts"
         [contact]="contact"
-        (click)="onSelected(contact)"
+        [routerLink]="contact.id"
       ></cms-contact-item>
     </div>
   </div>
