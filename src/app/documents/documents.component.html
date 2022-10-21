@@ -4,10 +4,6 @@
   </div>
 
   <div class="col-md-4">
-    <cms-document-detail
-      [document]="selectedDocument"
-      *ngIf="selectedDocument; else noDocument"
-    ></cms-document-detail>
-    <ng-template #noDocument> <p>No document selected</p> </ng-template>
+    <router-outlet></router-outlet>
   </div>
 </div>
