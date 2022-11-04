@@ -11,6 +11,10 @@
         *ngFor="let contact of contacts"
         [contact]="contact"
         [routerLink]="contact.id"
+        dnd-draggable
+        [dragEnabled]="true"
+        [dragData]="contact"
+        [dropZones]="['contactGroup']"
       ></cms-contact-item>
     </div>
   </div>

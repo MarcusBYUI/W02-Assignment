@@ -11,7 +11,7 @@
             size="120"
             max="120"
             name="title"
-            ngModel="{{ editMode ? document.name : '' }}"
+            [ngModel]="document?.name"
             required
             #title="ngModel"
           />
@@ -28,7 +28,7 @@
             size="120"
             max="255"
             name="description"
-            ngModel="{{ editMode ? document.description : '' }}"
+            [ngModel]="document?.description"
           />
         </div>
       </div>
@@ -43,7 +43,7 @@
             size="150"
             max="255"
             name="url"
-            ngModel="{{ editMode ? document.url : '' }}"
+            [ngModel]="document?.url"
             required
             #link="ngModel"
           />
