@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './contact-edit.component.html',
   styleUrls: ['./contact-edit.component.css'],
 })
-export class ContactEditComponent implements OnInit {
+export class ContactEditComponent implements OnInit, OnDestroy {
   originalContact: Contact;
   contact: Contact;
   groupContacts: Contact[] = [];
@@ -52,7 +52,33 @@ export class ContactEditComponent implements OnInit {
     this.router.navigateByUrl('/contacts');
   }
 
-  onSubmit(form: NgForm) {}
+  onSubmit(form: NgForm) {
+    let value = form.value; // get values from form’s fields
+    //set id to prev doc or get new id based on edit mode
+    let id: string = this.editMode
+      ? this.originalContact.id
+      : String(this.contactService.getMaxId() + 1);
+
+    let newContact = new Contact(
+      id,
+      value.name,
+      value.email,
+      value.phone,
+      value.imageUrl,
+      this.groupContacts
+    );
+
+    if (this.editMode) {
+      //          this.contactService.updateContact(this.originalContact, newContact);
+
+      this.contactService.updateContact(this.originalContact, newContact);
+    } else {
+      //   this.contactService.addContact(newContact);
+      this.contactService.addContact(newContact);
+    }
+    //  route back to the '/contacts' URL
+    this.router.navigateByUrl('/contacts');
+  }
 
   onDropSuccess() {}
 
@@ -94,5 +120,8 @@ export class ContactEditComponent implements OnInit {
       return;
     }
     this.groupContacts.splice(index, 1);
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
