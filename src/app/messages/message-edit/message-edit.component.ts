@@ -17,9 +17,10 @@ export class MessageEditComponent implements OnInit {
 
   onSendMessage(e: Event) {
     e.preventDefault();
+    let id: string = String(this.MessageService.getMaxId() + 1);
     this.MessageService.addMessage(
       new Message(
-        '1',
+        id,
         this.subjectRef.nativeElement.value,
         this.msgTextRef.nativeElement.value,
         '7'
