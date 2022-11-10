@@ -8,6 +8,7 @@ import { ContactService } from '../contact.service';
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[];
+  term: string;
 
   constructor(private ContactService: ContactService) {}
 
@@ -16,5 +17,9 @@ export class ContactListComponent implements OnInit {
     this.ContactService.contactChangedEvent.subscribe(
       (contacts: Contact[]) => (this.contacts = contacts)
     );
+  }
+
+  search(value: string) {
+    this.term = value;
   }
 }
