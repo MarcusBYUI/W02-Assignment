@@ -14,9 +14,9 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
     this.ContactService.getContacts();
-    this.ContactService.contactChangedEvent.subscribe(
-      (contacts: Contact[]) => (this.contacts = contacts)
-    );
+    this.ContactService.contactChangedEvent.subscribe((contacts: Contact[]) => {
+      this.contacts = contacts;
+    });
   }
 
   search(value: string) {

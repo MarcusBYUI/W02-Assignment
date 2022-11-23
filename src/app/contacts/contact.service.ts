@@ -33,7 +33,7 @@ export class ContactService {
   getContact(id: string): Contact {
     for (let i = 0; i < this.contacts.length; i++) {
       const element = this.contacts[i];
-      if (element._id === id) {
+      if (element._id === id || element.id === id) {
         return element;
       }
     }
