@@ -42,7 +42,7 @@ export class MessageService {
     }
     message.id = '';
     this.messages.push(message);
-    this.storeMessages();
+    this.storeMessages(message);
   }
 
   getMaxId(): number {
@@ -71,14 +71,13 @@ export class MessageService {
     });
   }
 
-  storeMessages() {
-    const body = JSON.stringify(this.messages.slice());
+  storeMessages(message: Message) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     this.http
       .post<{ message: string; document: Message }>(
         'http://localhost:3000/messages',
-        body,
+        message,
         { headers }
       )
       .subscribe({
