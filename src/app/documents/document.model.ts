@@ -4,6 +4,7 @@ export class Document {
     public name: string,
     public description: string,
     public url: string,
-    public children?: {}[]
+    public children?: {}[],
+    public _id?: string
   ) {}
 }

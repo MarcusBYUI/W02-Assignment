@@ -19,9 +19,9 @@ router.post("/", (req, res, next) => {
 
   const message = new Message({
     id: maxMessageId,
-    name: req.body.name,
-    description: req.body.description,
-    url: req.body.url,
+    subject: req.body.subject,
+    msgText: req.body.msgText,
+    sender: req.body.sender,
   });
 
   message

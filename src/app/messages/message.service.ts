@@ -12,6 +12,20 @@ export class MessageService {
 
   constructor(private http: HttpClient) {}
 
+  sortAndSend() {
+    this.messages = this.messages.sort((a: Message, b: Message) => {
+      if (a.id < b.id) {
+        return -1;
+      } else if (a.id > b.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    this.messageChangedEvent.next(this.messages.slice());
+  }
+
   getMessage(id: string) {
     for (let i = 0; i < this.messages.length; i++) {
       const element = this.messages[i];
@@ -23,6 +37,10 @@ export class MessageService {
   }
 
   addMessage(message: Message) {
+    if (!message) {
+      return;
+    }
+    message.id = '';
     this.messages.push(message);
     this.storeMessages();
   }
@@ -41,28 +59,16 @@ export class MessageService {
   }
 
   getMessages() {
-    this.http
-      .get('https://ng-cms-app-9d43b-default-rtdb.firebaseio.com/messages.json')
-      .subscribe({
-        next: (messages: Message[]) => {
-          this.messages = messages;
-          this.maxMessageId = this.getMaxId();
-          this.messages = this.messages.sort((a: Message, b: Message) => {
-            if (a.id < b.id) {
-              return -1;
-            } else if (a.id > b.id) {
-              return 1;
-            } else {
-              return 0;
-            }
-          });
-
-          this.messageChangedEvent.next(this.messages.slice());
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
+    this.http.get('http://localhost:3000/messages').subscribe({
+      next: (messages: Message[]) => {
+        this.messages = messages;
+        this.maxMessageId = this.getMaxId();
+        this.sortAndSend();
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
   }
 
   storeMessages() {
@@ -70,14 +76,14 @@ export class MessageService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     this.http
-      .put(
-        'https://ng-cms-app-9d43b-default-rtdb.firebaseio.com/messages.json',
+      .post<{ message: string; document: Message }>(
+        'http://localhost:3000/messages',
         body,
         { headers }
       )
       .subscribe({
         next: () => {
-          this.messageChangedEvent.next(this.messages.slice());
+          this.sortAndSend();
         },
       });
   }
